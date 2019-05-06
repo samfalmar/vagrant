@@ -1,5 +1,3 @@
-  GNU nano 2.9.3                                                            Vagrantfile                                                                       
-
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
@@ -8,6 +6,14 @@ Vagrant.configure("2") do |config|
 
 #Definimos la máquina que vamos a utilizar
   config.vm.box = "ubuntu/trusty64"
+  
+#Configuración de la máquina
+config.vm.provider "virtualbox" do |vb|
+  vb.gui = true
+  vb.memory = "2048"
+end
+
+config.vm.define "lamp" do |lamp|
 
 #Declaramos el tipo de conexión y IPs   
   config.vm.network "private_network", ip: "10.0.0.5"
@@ -18,16 +24,13 @@ Vagrant.configure("2") do |config|
         sudo apt-get -y update && sudo apt-get -y upgrade
         sudo apt-get -y install apache2
         sudo apt-get -y install php5 php5-curl php5-cli php5-mysql php5-gd mysql-client
-
 #Instalación de MysqlServer
         debconf-set-selections <<< 'mysql-server mysql-server/root_password password ausias38'
         debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password ausias38'
         apt-get update
         sudo apt-get -y install mysql-server
-
 #Instalación de dependencias de php
         sudo apt-get install php5 php5-curl php5-cli php5-mysql php5-gd mysql-client
-
 #Instalación de adminer
         sudo mkdir /usr/share/adminer
         sudo wget "http://www.adminer.org/latest.php" -O /usr/share/adminer/latest.php
@@ -35,6 +38,8 @@ Vagrant.configure("2") do |config|
         echo "Alias /adminer.php /usr/share/adminer/adminer.php" | sudo tee /etc/apache2/conf-available/adminer.conf
         sudo a2enconf adminer.conf
         sudo service apache2 restart
-
 SHELL
+end
+
+#Fin de la configuración
 end
