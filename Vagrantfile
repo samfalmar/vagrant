@@ -20,8 +20,9 @@ Vagrant.configure("2") do |config|
         sudo apt-get -y install php5 php5-curl php5-cli php5-mysql php5-gd mysql-client
 
 #Instalación de MysqlServer
-        sudo debconf-set-selections <<< 'mysql-server/root_password password ausias38'
-        sudo debconf-set-selections <<< 'mysql-server/root_password_again password ausias38'
+        debconf-set-selections <<< 'mysql-server mysql-server/root_password password ausias38'
+        debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password ausias38'
+        apt-get update
         sudo apt-get -y install mysql-server
 
 #Instalación de dependencias de php
