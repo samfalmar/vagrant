@@ -23,3 +23,4 @@ Vagrant.configure("2") do |config|
 	sudo systemctl reload apache2
 SHELL
 end
+http://www.ubuntuboss.com/how-to-install-adminer-on-ubuntu/
