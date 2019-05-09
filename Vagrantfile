@@ -5,7 +5,7 @@
 Vagrant.configure("2") do |config|
 
 #Definimos la máquina que vamos a utilizar
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "/home/ausias/Escriptori/m06.box"
   
 #Configuración de la máquina
 config.vm.provider "virtualbox" do |vb|
